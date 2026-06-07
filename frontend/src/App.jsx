@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
@@ -28,16 +28,17 @@ function AppRoutes() {
       <Route path="/interview" element={<PrivateRoute><InterviewPage /></PrivateRoute>} />
       <Route path="/mock-interview" element={<PrivateRoute><MockInterviewPage /></PrivateRoute>} />
       <Route path="/result/:id" element={<PrivateRoute><ResultPage /></PrivateRoute>} />
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   )
 }
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AuthProvider>
         <AppRoutes />
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
